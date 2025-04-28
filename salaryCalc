@@ -1,0 +1,15 @@
+import re
+
+wage_input = (input("Enter your desired wage: (xx.xx for hourly or enter the full amount for yearly)"))
+
+if re.fullmatch(r"\d{2}\.\d{2}", wage_input):
+    wage = float(wage_input)
+    weekly_wage = 40 * wage
+    monthly_wage = weekly_wage * 4
+    yearly_wage = weekly_wage * 52
+    print(f"Your yearly is: ${yearly_wage:.2f}")
+else:
+    yearly_wage = float(wage_input)
+    weekly_wage = yearly_wage / 52
+    hourly_wage = weekly_wage / 40
+    print(f"Your hourly is: ${hourly_wage:.2f}")
