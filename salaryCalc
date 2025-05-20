@@ -2,14 +2,21 @@ import re
 
 wage_input = (input("Enter your desired wage: (xx.xx for hourly or enter the full amount for yearly)"))
 
-if re.fullmatch(r"\d{2}\.\d{2}", wage_input):
+
+if re.fullmatch(r"\d+(\.\d{1,2})?", wage_input):
     wage = float(wage_input)
-    weekly_wage = 40 * wage
-    monthly_wage = weekly_wage * 4
-    yearly_wage = weekly_wage * 52
-    print(f"Your yearly is: ${yearly_wage:.2f}")
+    if wage < 1000:
+        weekly_wage = 40 * wage
+        yearly_wage = weekly_wage * 52
+        monthly_wage = yearly_wage / 12
+        print(f"Your yearly is: ${yearly_wage:.2f}")
+        print(f"Your monthly is ${monthly_wage:.2f}")
+    else:
+        yearly_wage = wage
+        weekly_wage = yearly_wage / 52
+        hourly_wage = weekly_wage / 40
+        monthly_wage = yearly_wage /12
+        print(f"Your hourly is ${hourly_wage:.2f}")
+        print(f"Your monthly is ${monthly_wage:.2f}")
 else:
-    yearly_wage = float(wage_input)
-    weekly_wage = yearly_wage / 52
-    hourly_wage = weekly_wage / 40
-    print(f"Your hourly is: ${hourly_wage:.2f}")
+    print("Check your value.")
